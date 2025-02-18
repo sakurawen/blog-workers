@@ -1,7 +1,6 @@
 import type { AppLoadContext, EntryContext } from 'react-router';
-
 import { isbot } from 'isbot';
-import { renderToReadableStream } from 'react-dom/server';
+import { renderToReadableStream } from 'react-dom/server.edge';
 import { ServerRouter } from 'react-router';
 import 'dayjs/locale/zh-cn';
 
