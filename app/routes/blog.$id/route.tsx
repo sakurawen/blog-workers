@@ -26,8 +26,6 @@ export async function loader({ params }: Route.LoaderArgs) {
   };
 }
 
-export const meta: MetaFunction = () => [{ title: 'akumanoko' }];
-
 export default function Post({ params }: Route.ComponentProps) {
   return (
     <PageContainer className="pt-12  px-4 max-w-2xl mx-auto">
