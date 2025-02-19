@@ -34,6 +34,6 @@ export default function BlogPostList() {
 
 function PostList() {
   const { fetcher } = useLoaderData<typeof loader>();
-  const data = use<ExtendedRecordMap>(fetcher);
-  return <PostRenderer className="!w-auto" recordMap={data} />;
+  const data = use(fetcher);
+  return <PostRenderer className="!w-auto" recordMap={data as ExtendedRecordMap} />;
 }

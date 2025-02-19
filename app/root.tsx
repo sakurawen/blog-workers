@@ -1,5 +1,6 @@
 import type { MetaFunction } from 'react-router';
 import type { Route } from './+types/root';
+import { QueryClientProvider } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
@@ -11,8 +12,9 @@ import {
   ScrollRestoration,
 } from 'react-router';
 import { Toaster } from 'sonner';
-import { MotionProvider } from '~/components/providers/motion-providers';
+import { MotionProvider } from '~/components/providers/motion-provider';
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { queryClient } from './lib/query';
 import './app.css';
 
 dayjs.locale('zh-cn');
@@ -62,9 +64,11 @@ export default function App() {
   return (
     <div className="app">
       <MotionProvider>
-        <ScrollArea>
-          <Outlet />
-        </ScrollArea>
+        <QueryClientProvider client={queryClient}>
+          <ScrollArea>
+            <Outlet />
+          </ScrollArea>
+        </QueryClientProvider>
       </MotionProvider>
       <Toaster position="top-center" />
     </div>

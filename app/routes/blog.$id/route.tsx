@@ -1,8 +1,10 @@
 import type { ExtendedRecordMap } from 'notion-types';
+import type { MetaFunction } from 'react-router';
 import type { Route } from './+types/route';
 import { getPageTitle } from 'notion-utils';
 import { Suspense, use } from 'react';
 import { useLoaderData } from 'react-router';
+import { Comments } from '~/components/features/comments';
 import { PostLoader } from '~/components/features/notion/post-loader';
 import { PostRenderer } from '~/components/features/notion/post-renderer';
 import { PageContainer } from '~/components/ui/page-container';
@@ -24,18 +26,20 @@ export async function loader({ params }: Route.LoaderArgs) {
   };
 }
 
-export default function Post() {
+export const meta: MetaFunction = () => [{ title: 'akumanoko' }];
+
+export default function Post({ params }: Route.ComponentProps) {
   return (
     <PageContainer className="pt-12  px-4 max-w-2xl mx-auto">
       <PostHeader />
       <Suspense fallback={<PostLoader />}>
-        <PostContent />
+        <PostContent id={params.id} />
       </Suspense>
     </PageContainer>
   );
 }
 
-function PostContent() {
+function PostContent({ id }: { id: string }) {
   const { fetcher } = useLoaderData<typeof loader>();
   const { data, title } = use(fetcher);
   return (
@@ -44,10 +48,13 @@ function PostContent() {
         {`${title} - akumanoko`}
       </title>
       <PostRenderer
-        recordMap={data}
+        footer={
+          <Comments id={id} />
+        }
+        recordMap={data as ExtendedRecordMap}
         fullPage
         disableHeader
-        className="!w-full  px-0!"
+        className="!w-full  px-0! pb-0!"
       />
     </>
   );
