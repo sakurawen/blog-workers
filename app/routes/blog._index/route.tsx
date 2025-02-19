@@ -20,7 +20,7 @@ export default function BlogPostList() {
     <PageContainer className="pt-12  pb-8 max-w-2xl mx-auto">
       <div className="px-4 mb-8">
         <Link to="/">
-          <Button className="px-6 py-2 rounded-full text-xl ">
+          <Button size="icon" className="rounded-full text-xl ">
             <Icon icon="ri:arrow-left-line" />
           </Button>
         </Link>

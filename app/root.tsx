@@ -65,7 +65,7 @@ export default function App() {
     <div className="app">
       <MotionProvider>
         <QueryClientProvider client={queryClient}>
-          <ScrollArea>
+          <ScrollArea className="h-screen">
             <Outlet />
           </ScrollArea>
         </QueryClientProvider>
