@@ -1,26 +1,28 @@
 import type { ExtendedRecordMap } from 'notion-types';
-import type { MetaFunction } from 'react-router';
 import type { Route } from './+types/route';
 import { getPageTitle } from 'notion-utils';
-import { Suspense } from 'react';
+import { Suspense, use } from 'react';
 import { useLoaderData } from 'react-router';
 import { PostLoader } from '~/components/features/notion/post-loader';
 import { PostRenderer } from '~/components/features/notion/post-renderer';
 import { PageContainer } from '~/components/ui/page-container';
+import { request } from '~/lib/request';
 import { PostHeader } from './_components/post-header';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { id } = params;
-  const res = await fetch(`https://api.akumanoko.com/blog/${id}`);
-  return await res.json();
+  async function fetch() {
+    const data = await request.get<ExtendedRecordMap>(`blog/${id}`).json();
+    const title = getPageTitle(data);
+    return {
+      data,
+      title,
+    };
+  }
+  return {
+    fetcher: fetch(),
+  };
 }
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const title = getPageTitle(data as ExtendedRecordMap);
-  return [{
-    title: `${title}- akumanoko`,
-  }];
-};
 
 export default function Post() {
   return (
@@ -34,13 +36,19 @@ export default function Post() {
 }
 
 function PostContent() {
-  const data = useLoaderData() as ExtendedRecordMap;
+  const { fetcher } = useLoaderData<typeof loader>();
+  const { data, title } = use(fetcher);
   return (
-    <PostRenderer
-      recordMap={data}
-      fullPage
-      disableHeader
-      className="!w-full  px-0!"
-    />
+    <>
+      <title>
+        {`${title} - akumanoko`}
+      </title>
+      <PostRenderer
+        recordMap={data}
+        fullPage
+        disableHeader
+        className="!w-full  px-0!"
+      />
+    </>
   );
 }
