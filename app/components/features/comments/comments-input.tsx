@@ -34,10 +34,7 @@ export function CommentsInput({ id }: CommentsInputProps) {
     };
     try {
       await request.post('comments', {
-        body: JSON.stringify(create),
-        headers: {
-          'content-type': 'application/json',
-        },
+        json: create,
       });
       toast.success('评论成功');
       return {
