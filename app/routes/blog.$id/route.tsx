@@ -1,5 +1,4 @@
 import type { ExtendedRecordMap } from 'notion-types';
-import type { MetaFunction } from 'react-router';
 import type { Route } from './+types/route';
 import { getPageTitle } from 'notion-utils';
 import { Suspense, use } from 'react';
