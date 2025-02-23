@@ -35,7 +35,6 @@ export function CommentsInput({ id }: CommentsInputProps) {
     try {
       await request.post('comments', {
         json: create,
-        credentials: 'include',
       });
       toast.success('评论成功');
       return {
