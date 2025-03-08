@@ -2,10 +2,10 @@ import type { Comment } from './comments-type.ts';
 import { Icon } from '@iconify/react';
 import { useActionState } from 'react';
 import { toast } from 'sonner';
+import { useSWRConfig } from 'swr';
 import { Button } from '~/components/ui/button';
 import { Textarea } from '~/components/ui/textarea';
 import { auth } from '~/lib/auth';
-import { queryClient } from '~/lib/query.js';
 import { request } from '~/lib/request.js';
 
 interface CommentsInputProps {
@@ -13,6 +13,7 @@ interface CommentsInputProps {
 }
 export function CommentsInput({ id }: CommentsInputProps) {
   const { data } = auth.useSession();
+  const { mutate } = useSWRConfig();
   const [state, action, isPending] = useActionState(async (_: any, form: FormData) => {
     const comment = form.get('comment') as string;
     if (comment.trim().length === 0) {
@@ -49,20 +50,18 @@ export function CommentsInput({ id }: CommentsInputProps) {
       };
     }
     finally {
-      queryClient.invalidateQueries({
-        queryKey: ['comments', id],
-      });
+      mutate(id);
     }
   }, { comment: '' });
 
   return (
-    <div className="comment-input rounded-xl">
-      <div className="pt-4 relative">
+    <div className='comment-input rounded-xl'>
+      <div className='pt-4 relative'>
         <form action={action}>
-          <Textarea name="comment" defaultValue={state.comment} disabled={isPending} className="block w-full py-2.5 resize-none" rows={8} placeholder="评论文章是免费的..." />
-          <div className="comment-actions absolute right-1.5 bottom-1.5">
-            <Button variant="ghost" type="submit" disabled={isPending}>
-              <Icon icon="lucide:send" className="mr-1" />
+          <Textarea name='comment' defaultValue={state.comment} disabled={isPending} className='block w-full py-2.5 resize-none' rows={8} placeholder='评论文章是免费的...' />
+          <div className='comment-actions absolute right-1.5 bottom-1.5'>
+            <Button variant='ghost' type='submit' disabled={isPending}>
+              <Icon icon='lucide:send' className='mr-1' />
               提 交
             </Button>
           </div>
