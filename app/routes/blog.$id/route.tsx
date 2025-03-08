@@ -27,7 +27,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export default function Post({ params }: Route.ComponentProps) {
   return (
-    <PageContainer className="pt-12  px-4 max-w-2xl mx-auto">
+    <PageContainer className='pt-12  px-4 max-w-2xl mx-auto'>
       <PostHeader />
       <Suspense fallback={<PostLoader />}>
         <PostContent id={params.id} />
@@ -51,7 +51,7 @@ function PostContent({ id }: { id: string }) {
         recordMap={data as ExtendedRecordMap}
         fullPage
         disableHeader
-        className="!w-full  px-0! pb-0!"
+        className='!w-full  px-0! pb-0!'
       />
     </>
   );

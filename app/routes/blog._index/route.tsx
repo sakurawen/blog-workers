@@ -17,11 +17,11 @@ export async function loader() {
 
 export default function BlogPostList() {
   return (
-    <PageContainer className="pt-12  pb-8 max-w-2xl mx-auto">
-      <div className="px-4 mb-8">
-        <Link to="/">
-          <Button size="icon" className="rounded-full text-xl ">
-            <Icon icon="ri:arrow-left-line" />
+    <PageContainer className='pt-12  pb-8 max-w-2xl mx-auto'>
+      <div className='px-4 mb-8'>
+        <Link to='/'>
+          <Button size='icon' className='rounded-full text-xl '>
+            <Icon icon='ri:arrow-left-line' />
           </Button>
         </Link>
       </div>
@@ -35,5 +35,5 @@ export default function BlogPostList() {
 function PostList() {
   const { fetcher } = useLoaderData<typeof loader>();
   const data = use(fetcher);
-  return <PostRenderer className="!w-auto" recordMap={data as ExtendedRecordMap} />;
+  return <PostRenderer className='!w-auto' recordMap={data as ExtendedRecordMap} />;
 }

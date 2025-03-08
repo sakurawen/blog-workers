@@ -8,7 +8,7 @@ const Code = import('react-notion-x/build/third-party/code').then(m => ({ defaul
 
 const Collection = lazy(() => import('react-notion-x/build/third-party/collection').then(r => ({ default: r.Collection })));
 
-const components = {
+const components: React.ComponentProps<typeof NotionRenderer>['components'] = {
   Code,
   Collection,
   Link: NavLink,

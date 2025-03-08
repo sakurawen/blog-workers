@@ -7,24 +7,24 @@ const socials = [
   {
     name: 'Twitter',
     url: 'https://twitter.com/wenhouman',
-    icon: <Icon className="size-6" icon="ri:twitter-x-fill" />,
+    icon: <Icon className='size-6' icon='ri:twitter-x-fill' />,
   },
   {
     name: 'github',
     url: 'https://github.com/sakurawen',
-    icon: <Icon className="size-6" icon="ri:github-line" />,
+    icon: <Icon className='size-6' icon='ri:github-line' />,
 
   },
   {
     name: 'bilibili',
     url: 'https://space.bilibili.com/2940875',
-    icon: <Icon className="size-6" icon="ri:bilibili-line" />,
+    icon: <Icon className='size-6' icon='ri:bilibili-line' />,
 
   },
   {
     name: 'email',
     url: `mailto:wisakura@outlook.com`,
-    icon: <Icon className="size-6" icon="ri:mail-line" />,
+    icon: <Icon className='size-6' icon='ri:mail-line' />,
   },
 ];
 
@@ -42,8 +42,8 @@ export function Social({ className }: { className?: string }) {
             >
               <Link
                 to={s.url}
-                target="_blank"
-                className="inline-block p-1.5 cursor-default rounded-md transition-colors   hover:bg-gray-200/60"
+                target='_blank'
+                className='inline-block p-1.5 cursor-default rounded-md transition-colors   hover:bg-gray-200/60'
               >
                 {s.icon}
               </Link>
