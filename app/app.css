@@ -148,6 +148,7 @@ body {
 
 .notion-collection-card-cover {
   height: unset !important;
+  aspect-ratio: 16/9;
 }
 .notion-collection-card-cover > img {
   aspect-ratio: 16/9;

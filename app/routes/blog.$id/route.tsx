@@ -5,6 +5,7 @@ import { Suspense, use } from 'react';
 import { useLoaderData } from 'react-router';
 import { Comments } from '~/components/features/comments';
 import { PostLoader } from '~/components/features/notion/post-loader';
+import { PostMap } from '~/components/features/notion/post-map';
 import { PostRenderer } from '~/components/features/notion/post-renderer';
 import { PageContainer } from '~/components/ui/page-container';
 import { request } from '~/lib/request';
@@ -44,6 +45,7 @@ function PostContent({ id }: { id: string }) {
       <title>
         {`${title} - akumanoko`}
       </title>
+      <PostMap recordMap={data} id={id} />
       <PostRenderer
         footer={
           <Comments id={id} />
